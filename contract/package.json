@@ -1,0 +1,12 @@
+{
+  "name": "freelance-staking",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gouaby Kalivogui",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "@truffle/hdwallet-provider": "^1.4.0",
+    "bignumber.js": "^9.0.1",
+    "dotenv": "^10.0.0"
+  }
+}

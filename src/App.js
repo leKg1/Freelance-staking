@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  Button,
+  Heading
+} from "@chakra-ui/react"
+import { useMoralis } from 'react-moralis'
+import SmartContracts from './SmartContracts';
+import InvoicesTable from './InvoicesTable';
+import DeploySmartContract from './DeploySmartContract';
+import SmartContractInfos from './SmartContractInfos';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const { authenticate, isAuthenticated, isAuthenticating, authError, logout, user, isAuthUndefined } = useMoralis();
+  let { tokenAddress } = useParams()
+  
+  if(isAuthenticated){
+    return (
+    <div>
+     <Heading textAlign="center" color="gray.700">Welcome to freelance-staking, {user.attributes.username}</Heading>
+     <Button onClick={() => logout()}>Logout</Button>
+     <p>&nbsp;</p>
+     <DeploySmartContract />
+     <p>&nbsp;</p> 
+     <Heading textAlign="center" color="gray.700">Contracts</Heading>
+     <p>&nbsp;</p>    
+     <SmartContracts />
+     <p>&nbsp;</p> 
+     <Route path="/:tokenAddress" children={<SmartContractInfos tokenAddress={tokenAddress} />} />
+     <p>&nbsp;</p>
+     <Heading textAlign="center" color="gray.700">Invoices</Heading>
+     <p>&nbsp;</p> 
+     <InvoicesTable />
     </div>
-  );
+    )
+  }else return <Button isLoading={isAuthenticating} onClick={() => authenticate()}>Authenticate</Button>
 }
 
 export default App;
