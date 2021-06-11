@@ -25,7 +25,7 @@ const Row = ({
         <Td>{invoiceNo}</Td>
         <Td>{clientName}</Td>
         <Td>{invoiceDate}</Td>
-        <DeleteIcon onClick={async()=>await data.destroy(invoiceNo)}/>
+        <Td><DeleteIcon onClick={async()=>await data.destroy(invoiceNo)}/></Td>
       </Tr>
     );
   };

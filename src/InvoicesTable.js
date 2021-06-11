@@ -18,11 +18,12 @@ import Row from './Row';
 const InvoicesTable = () => {
     const { fetch, data, isLoading } = useMoralisQuery("Invoices")
     return (
-      <Table variant="simple">
+      <div><Table variant="simple">
         <Head />
         <Tbody>
           {data.map((d) => (
             <Row
+              key={d.attributes.invoice.invoiceTitle}
               data={d}
               invoiceNo={d.attributes.invoice.invoiceTitle}
               clientName={d.attributes.invoice.clientName}
@@ -30,7 +31,7 @@ const InvoicesTable = () => {
             />
           ))}
         </Tbody>
-      </Table>
+      </Table></div>
     );
   };
 
