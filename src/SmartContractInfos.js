@@ -16,6 +16,7 @@ import {
   import { bytecode } from './bytecode';
 
 const SmartContractInfos = (props) => {
+  
     const [ourFreelanceSmartContract, setOurFreelanceSmartContract] = useState(undefined) //this is the smartContractInstance
     const [smartContractBalanceETH, setSmartContractBalanceETH] = useState(0)
     const [smartContractBalanceFREE, setSmartContractBalanceFREE] = useState(0)
@@ -43,7 +44,7 @@ const SmartContractInfos = (props) => {
         if (address != undefined && address != "" && ourFreelanceSmartContract!=undefined) {
             showNameAndAddress()
             getETHBalances()
-            getMELBalances()
+            getFREEBalances()
             getStakeInfo()
         }
     } catch (ex) {
@@ -108,16 +109,16 @@ const getStakeInfo = async () => {
     setTotalStakes(web3.utils.fromWei(totalStakes, "ether") + " FREE")
     
     const myStakes = await ourFreelanceSmartContract.methods.stakeOf(address).call()
-    setMyMELStake(web3.utils.fromWei(myStakes, "ether") + " FREE")
+    setMyFreeStake(web3.utils.fromWei(myStakes, "ether") + " FREE")
     
     const totalRewards = await ourFreelanceSmartContract.methods.totalRewards().call()
     setTotalRewards(web3.utils.fromWei(totalRewards, "ether") + " FREE")
 
     const balance = await ourFreelanceSmartContract.methods.balanceOf(address).call()
-    setMyMelBalance(web3.utils.fromWei(balance, "ether") + " FREE")
+    setMyFreeBalance(web3.utils.fromWei(balance, "ether") + " FREE")
 
     const myRewards = await ourFreelanceSmartContract.methods.rewardOf(address).call()
-    setMyMELRewards(web3.utils.fromWei(myRewards, "ether") + " FREE")
+    setMyFreeRewards(web3.utils.fromWei(myRewards, "ether") + " FREE")
 }
 
   return (
@@ -130,7 +131,7 @@ const getStakeInfo = async () => {
                     <Tr><Td>TokenName:</Td><Td>{tokenName}</Td></Tr>
                     <Tr><Td>TokenSymbol:</Td><Td>{tokenSymbol}</Td></Tr>
                     <Tr><Td>TotalSupply:</Td><Td isNumeric>{window.web3.utils!=undefined?window.web3.utils.fromWei(tokenInitialSupply, "ether"):0}</Td></Tr>
-                    <Tr><Td>Balance MEL:</Td><Td isNumeric>{smartContractBalanceMEL}</Td></Tr>
+                    <Tr><Td>Balance MEL:</Td><Td isNumeric>{smartContractBalanceFREE}</Td></Tr>
                     <Tr><Td>Balance ETH:</Td><Td isNumeric>{smartContractBalanceETH}</Td></Tr>
                     <Tr><Td>Total Stakes MEL:</Td><Td isNumeric>{totalStakes}</Td></Tr>
                     <Tr><Td>Total Rewards MEL:</Td><Td isNumeric>{totalRewards}</Td></Tr>

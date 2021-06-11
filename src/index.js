@@ -12,8 +12,8 @@ import {
   useParams
 } from "react-router-dom";
 
-const appId = "GP48ud1cD27gHPTjMtn6LlJdbC2CwmT82ZnI0sGS"
-const serverUrl = "https://ijvbdf4adeyg.moralis.io:2053/server"
+const appId = "LIH9AUHhgxHJL1znD3sihvs4FYHUg1LRmQKF0Inb"
+const serverUrl = "https://m0tqpnkafcwt.moralis.io:2053/server"
 
 const theme = extendTheme({
   config: {

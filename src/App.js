@@ -20,27 +20,27 @@ import {
 function App() {
   const { authenticate, isAuthenticated, isAuthenticating, authError, logout, user, isAuthUndefined } = useMoralis();
   let { tokenAddress } = useParams()
-  
-  if(isAuthenticated){
+
+  if (isAuthenticated) {
     return (
-    <div>
-     <Heading textAlign="center" color="gray.700">Welcome to freelance-staking, {user.attributes.username}</Heading>
-     <Button onClick={() => logout()}>Logout</Button>
-     <p>&nbsp;</p>
-     <DeploySmartContract />
-     <p>&nbsp;</p> 
-     <Heading textAlign="center" color="gray.700">Contracts</Heading>
-     <p>&nbsp;</p>    
-     <SmartContracts />
-     <p>&nbsp;</p> 
-     <Route path="/:tokenAddress" children={<SmartContractInfos tokenAddress={tokenAddress} />} />
-     <p>&nbsp;</p>
-     <Heading textAlign="center" color="gray.700">Invoices</Heading>
-     <p>&nbsp;</p> 
-     <InvoicesTable />
-    </div>
+      <div>
+        <Heading textAlign="center" color="gray.700">Welcome to freelance-staking, {user.attributes.username}</Heading>
+        <Button onClick={() => logout()}>Logout</Button>
+        <p>&nbsp;</p>
+        <DeploySmartContract />
+        <p>&nbsp;</p>
+        <Heading textAlign="center" color="gray.700">Contracts</Heading>
+        <p>&nbsp;</p>
+        <SmartContracts />
+        <p>&nbsp;</p>
+        <Route path="/:tokenAddress" children={<SmartContractInfos tokenAddress={tokenAddress} />} />
+        <p>&nbsp;</p>
+        <Heading textAlign="center" color="gray.700">Invoices</Heading>
+        <p>&nbsp;</p>
+        <InvoicesTable />
+      </div>
     )
-  }else return <Button isLoading={isAuthenticating} onClick={() => authenticate()}>Authenticate</Button>
+  } else return <Button isLoading={isAuthenticating} onClick={() => authenticate()}>Authenticate</Button>
 }
 
 export default App;

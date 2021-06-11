@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typechain/web3-v1": "^3.0.0",
+    "typechain": "^5.0.0"
   }
 }
