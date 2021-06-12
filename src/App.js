@@ -8,6 +8,7 @@ import SmartContracts from './SmartContracts';
 import InvoicesTable from './InvoicesTable';
 import DeploySmartContract from './DeploySmartContract';
 import SmartContractInfos from './SmartContractInfos';
+import Transactions from './Transactions'
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,7 +31,8 @@ function App() {
         <DeploySmartContract />
         <p>&nbsp;</p>
         <Heading textAlign="center" color="gray.700">Contracts</Heading>
-        <p>&nbsp;</p>
+        <p>&nbsp;</p> 
+        {/* <Transactions /> TODO please delete component if not needed */}
         <SmartContracts />
         <p>&nbsp;</p>
         <Route path="/:tokenAddress" children={<SmartContractInfos tokenAddress={tokenAddress} />} />
