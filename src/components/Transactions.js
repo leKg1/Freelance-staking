@@ -1,6 +1,6 @@
 import Moralis from 'moralis';
 import { useEffect,useState } from 'react';
-import Web3 from 'web3';
+
 const Transactions = () => {
 
     const [transactions, setTransactions] = useState()

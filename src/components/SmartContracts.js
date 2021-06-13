@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Moralis from 'moralis';
-import { useMoralisQuery, useMoralis,useNewMoralisObject } from "react-moralis";
+import { useMoralisQuery} from "react-moralis";
 import {
-    Input,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
-    Button
   } from "@chakra-ui/react";
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
-  useParams
 } from "react-router-dom";
 import { abi } from "../abi"
 
@@ -27,11 +19,11 @@ const SmartContracts =  () => {
 
   const web3Lib = new Moralis.Web3();
   const [smartContractList, setSmartContractList] = useState([]);
-  const { fetch, data, isLoading } = useMoralisQuery("FreelanceToken")
+  const { data } = useMoralisQuery("FreelanceToken")
 
   useEffect(() => {
-    console.log(data)
 
+    console.log(data)
     const getData = async () => {
       const web3 = await Moralis.Web3.enable();
       const newBalances = []

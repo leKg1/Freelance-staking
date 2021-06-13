@@ -1,15 +1,7 @@
 import React, {  } from 'react';
 import {
-    Input,
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
     Tr,
-    Th,
     Td,
-    TableCaption,
-    Button
   } from "@chakra-ui/react";
   import { DeleteIcon } from '@chakra-ui/icons'
 
