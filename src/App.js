@@ -21,11 +21,12 @@ function App() {
   const changeMode = (mode) => setMode(mode)
 
   let { tokenAddress } = useParams()
-
+  const LogoutButton = () => {return  <Button colorScheme="teal" onClick={() => logout()}>Logout</Button>}
   const displayContractList = () => {
     return (
       <div>
-        <Button colorScheme="purple" onClick={() => changeMode(MODE_NEW_CONTRACT)}>New Token Project</Button>
+        <LogoutButton/>
+        <Button colorScheme="purple" onClick={() => changeMode(MODE_NEW_CONTRACT)}>Deploy Token Project</Button>
         <p>&nbsp;</p>
         <Heading textAlign="center" color="gray.700">Contracts</Heading> 
         <SmartContracts />
@@ -40,6 +41,7 @@ function App() {
   const displayNewContract = () => {
     return (
       <div>
+          <LogoutButton/>
         <Button colorScheme="purple" onClick={() => changeMode(MODE_LIST_CONTRACTS)}>My Token Projects</Button>
         <p>&nbsp;</p>
         <Heading textAlign="center" color="gray.700">Deploy New Staking Token</Heading> 
@@ -53,7 +55,7 @@ function App() {
     return (
       <div>
         <Heading textAlign="center" color="gray.700">Welcome to DeLive (DeLi)</Heading>
-        <Button colorScheme="teal" onClick={() => logout()}>Logout</Button>
+       
       
         {mode===MODE_NEW_CONTRACT && displayNewContract()}
         {mode===MODE_LIST_CONTRACTS && displayContractList()}
