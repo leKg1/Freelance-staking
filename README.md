@@ -1,17 +1,31 @@
+# DeLive (DeLi)
+
 ### TODOs
+- (GK) deploy on matic 
+- (GK) deploy to second blockchain (moonbeam)
+- (GK/NK) use 1inch to swap tokens on site https://1inch.io/
 
-- Only display FreelanceToken
+### missing functions
+- (NK) 1% to parent token   
+- (GK) display totalStakes, ourStake in contract list
+- (GK)  write invoice in € or $ or BTC or ETC display current value in another currency via chainlink price feed 
+- send invoice by email
+- show, mark and filter paid and unpaid invoices 
 
-- Check who sees the smart contract (the owner and token holder?)
+### design
+- (NK) fix InvoiceTable (broken)
+- (NK/JC) write about DeLive on Landing Page (Write Invoice, Get Paid in crypto, Staking, Dividends, Parent and Child tokens)
+- find designer who can quickly fix landing page and app.
+- add numbers to landing page. total deployed staking contracts, currently locked value
 
-- If you have a contractAddress you could via standard web3 js lib ask the blockchain about name, symbol, totalSupply and balance instead!
+### smart contracts
+#### Staking Token
+- (GK) create updatable smart contract
+- (GK) add USDT, xDAI and other stable tokens to smart contract (should be able to send)
+- (GK) rename FreelanceToken to DeLive DeLi
 
--  If something is a FreelanceToken, we can also display totalStakes, ourStake
+#### Invoice Token
+- (NK) create Invoice SmartContract with invoiceNo, ipfs cid
 
-- When clicking on a ERC20Token (Smart Contract) project you can see all your invoices there and start writing new invoices
-
-- Send Invoices by email
-
-- Show Open Invoices 
-
-- Show Paid Invoices
+#### Documentation
+- write Documentation

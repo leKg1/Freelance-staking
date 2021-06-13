@@ -29,6 +29,7 @@ ReactDOM.render(
             <Route exact path="/" children={<Landing />} />
             <Route path="/app" children={<App />} />
             <Route path="/app/:tokenAddress" children={<App />} />
+            <Route path="/app/:tokenAddress/:invoiceNo" children={<App />} />
           </Switch>
         </Router>
       </ChakraProvider>

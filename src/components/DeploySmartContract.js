@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Input,
   Table,
-  Thead,
   Tbody,
-  Tfoot,
   Tr,
-  Th,
   Td,
-  TableCaption,
   Button,
   ErrorMessage
 } from "@chakra-ui/react";
@@ -25,7 +21,7 @@ const DeploySmartContract = () => {
 
   const [smartContractAddress, setSmartContractAddress] = useState();
 
-  const { authenticate, isAuthenticated, isAuthenticating, authError, logout, user, isAuthUndefined } = useMoralis();
+  const { user } = useMoralis();
   const { isSaving, error, save } = useNewMoralisObject('FreelanceToken');
 
   const registerSmartContract = () => {

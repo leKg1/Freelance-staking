@@ -18,10 +18,7 @@ const SmartContracts =  () => {
   const web3Lib = new Moralis.Web3();
   const [smartContractList, setSmartContractList] = useState([]);
   const { data } = useMoralisQuery("FreelanceToken")
-
   useEffect(() => {
-
-    console.log(data)
     const getData = async () => {
       const web3 = await Moralis.Web3.enable();
       const newBalances = []
@@ -63,7 +60,6 @@ const SmartContracts =  () => {
       </Tr>
     )
   })
-  console.log('rerendering')
 
   return (
     <Table variant="simple">

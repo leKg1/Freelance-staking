@@ -1,22 +1,14 @@
 import React from 'react';
 import {
-    Input,
     Table,
-    Thead,
     Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    Button
   } from "@chakra-ui/react";
-import { useMoralis, useNewMoralisObject, useMoralisQuery } from 'react-moralis';
+import { useMoralisQuery } from 'react-moralis';
 import Head from './Head';
 import Row from './Row';
 
 const InvoicesTable = () => {
-    const { fetch, data, isLoading } = useMoralisQuery("Invoices")
+    const { data } = useMoralisQuery("Invoices")
     return (
       <div><Table variant="simple">
         <Head />
