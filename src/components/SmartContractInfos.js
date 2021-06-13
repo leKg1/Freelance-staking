@@ -12,8 +12,8 @@ import {
     Button
   } from "@chakra-ui/react";
   import Moralis from 'moralis';
-  import { abi } from "./abi"
-  import { bytecode } from './bytecode';
+  import { abi } from "../abi"
+  import { bytecode } from '../bytecode';
 
 const SmartContractInfos = (props) => {
   
@@ -39,20 +39,17 @@ const SmartContractInfos = (props) => {
     const [amountToUnstake, setAmountToUnstake] = useState(0)
 
   useEffect(()=>{
-    try {
-        getAdrresses()
-        if (address != undefined && address != "" && ourFreelanceSmartContract!=undefined) {
-            showNameAndAddress()
-            getETHBalances()
-            getFREEBalances()
-            getStakeInfo()
-        }
-    } catch (ex) {
-
-    }
+      if(!props.tokenAddress) return
+      getAdrresses()
+      if (address != undefined && address != "" && ourFreelanceSmartContract!=undefined) {
+          showNameAndAddress()
+          getETHBalances()
+          getFREEBalances()
+          getStakeInfo()
+      }
 },[address])
 
-const getAdrresses = async () => {  
+const getAdrresses = async () => {
   const web3 = await Moralis.Web3.enable();
   const ourFreelanceSmartContract = new web3.eth.Contract(abi, props.tokenAddress);
   setOurFreelanceSmartContract(ourFreelanceSmartContract);

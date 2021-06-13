@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Home from './pages/Home';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import { MoralisProvider } from 'react-moralis';
@@ -27,8 +28,9 @@ ReactDOM.render(
       <ChakraProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path="/" children={<App />} />
-            <Route path="/:tokenAddress" children={<App />} />
+            <Route exact path="/" children={<Home />} />
+            <Route path="/app" children={<App />} />
+            <Route path="/app/:tokenAddress" children={<App />} />
           </Switch>
         </Router>
       </ChakraProvider>

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Moralis from 'moralis';
 import { useMoralisQuery, useMoralis,useNewMoralisObject } from "react-moralis";
-import Web3 from "web3"
-import detectEthereumProvider from '@metamask/detect-provider';
-
 import {
     Input,
     Table,
@@ -24,31 +21,19 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import { abi } from "./abi"
-
+import { abi } from "../abi"
 
 const SmartContracts =  () => {
 
+  const web3Lib = new Moralis.Web3();
   const [smartContractList, setSmartContractList] = useState([]);
   const { fetch, data, isLoading } = useMoralisQuery("FreelanceToken")
-  console.log('data',data)
-  useEffect(() => {
-    const getData = async () => {
-      const provider = await detectEthereumProvider();
-      const web3 = new Web3(provider)
-      if (!provider) {
-        console.log('Please install MetaMask!');
-        return
-      }
-      // const options = {
-      //   chain: "ropsten",
-      //   address: "0x0c9D471976833dC2E910527163DBACf780D30DFF",
-      // };
-      // const balances = await Moralis.Web3.getAllERC20();
 
-        //query => query.equalTo("invoice.invoiceTitle", invoiceNo), [invoiceNo], {live: true}
-     // )
-      console.log('data',data)
+  useEffect(() => {
+    console.log(data)
+
+    const getData = async () => {
+      const web3 = await Moralis.Web3.enable();
       const newBalances = []
       for (let index = 0; index < data.length; index++) {
         let contract = Object.create(data[index].attributes);
@@ -57,15 +42,18 @@ const SmartContracts =  () => {
           contract.name = name
           ourFreelanceSmartContract.methods.symbol().call().then(symbol => {
             contract.symbol = symbol
-            ourFreelanceSmartContract.methods.totalSupply().call().then(totalSupply => {
-              contract.totalSupply = totalSupply
-              web3.eth.getBalance(contract.smartContractAddress).then(balance => {
-                contract.tokenBalance = balance
-                newBalances.push(contract)
-                setSmartContractList(newBalances)
+              ourFreelanceSmartContract.methods.decimals().call().then(decimals => {
+              contract.decimals = decimals
+                ourFreelanceSmartContract.methods.totalSupply().call().then(totalSupply => {
+                  contract.totalSupply = totalSupply
+                  web3.eth.getBalance(contract.smartContractAddress).then(balance => {
+                    contract.tokenBalance = balance
+                    newBalances.push(contract)
+                    setSmartContractList(newBalances)
+                  })
+                })
               })
-            })
-          })
+           })
         })
       }
     }
@@ -73,14 +61,15 @@ const SmartContracts =  () => {
   }, []);
 
   console.log('generating smartcontractlist', smartContractList)
-  const list2 = smartContractList.map((contract, i) => {
+  const contractRows = smartContractList.map((contract, i) => {
     return (
       <Tr key={i}>
-        <Td>{contract.name}</Td>
-        <Td>{contract.symbol}</Td>
-        <Td><Link to={"/" + contract.smartContractAddress}>{contract.smartContractAddress}</Link></Td>
-        <Td>{contract.tokenBalance} {contract.symbol}</Td>
-        <Td>{contract.totalSupply}</Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{contract.name}</Link></Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{contract.symbol}</Link></Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{contract.decimals}</Link></Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{contract.smartContractAddress}</Link></Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{web3Lib?web3Lib.utils.fromWei(contract.tokenBalance, "ether"):'loading'} {contract.symbol}</Link></Td>
+        <Td><Link to={"/app/" + contract.smartContractAddress}>{web3Lib?web3Lib.utils.fromWei(contract.totalSupply, "ether"):'loading'}</Link></Td>
       </Tr>
     )
   })
@@ -92,13 +81,14 @@ const SmartContracts =  () => {
         <Tr>
           <Th>Name</Th>
           <Th>Symbol</Th>
+          <Th>Decimals</Th>
           <Th>TokenAddress</Th>
           <Th>Balance</Th>
           <Th>TotalSupply</Th>
         </Tr>
       </Thead>
       <Tbody>
-        {list2}
+        {contractRows}
       </Tbody>
     </Table>
   )

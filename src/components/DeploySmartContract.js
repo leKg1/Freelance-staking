@@ -15,8 +15,8 @@ import {
 
 import Moralis from 'moralis';
 import { useMoralis,useNewMoralisObject } from "react-moralis";
-import { abi } from "./abi"
-import { bytecode } from './bytecode';
+import { abi } from "../abi"
+import { bytecode } from '../bytecode';
 
 const DeploySmartContract = () => {
   const [tokenName, setTokenName] = useState('')
